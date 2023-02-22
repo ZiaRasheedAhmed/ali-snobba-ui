@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
+import { useParams } from "react-router-dom";
 import styles from './ProductDetail.module.css';
+import { Link } from "react-router-dom";
+
 const ProductDetail = () =>{
     const [quantity, setQuantity] = useState('1');
 
@@ -8,6 +11,13 @@ const ProductDetail = () =>{
     const handleQuantity = useCallback(e => {
         setQuantity(e.target.value);
     }, []);
+
+    const param = useParams();
+    const [product, setProduct] = useState([]);
+
+    useEffect(()=>{
+        fetch("http://localhost:8080/product/"+param.productID).then((response) => response.json()).then((result) => setProduct(result));
+    }, [param.productID]);
     return(
         <>
             <div className={styles.header}>
@@ -15,24 +25,25 @@ const ProductDetail = () =>{
                     <img className={styles.logo} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/Logo.png"></img>
                 </nav>
             </div>
+            <h1>Product Details</h1>
             <div className={styles.mainContainer}>
                 <table className={styles.productDesc}>
                     <tr>
-                        <td rowSpan={2}><img src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/LandYachtMotorHome.jpg" className={styles.image}></img></td>
+                        <td rowSpan={2}><img src={product.productImage} className={styles.image}></img></td>
                     </tr>
                     <tr>
                         <div className={styles.descText}>
                             <td className={styles.text}>
-                                <h2>Ruby Slippers</h2>
-                                <p>Harry Winston has carefully crafted these fantastic shoes.  Each pair boasts a total of 4,600 gemstones including 1,350 carats of premium rubies and 50 carats of diamonds. You’ll be the talk of the town when you wear these slippers (not to mention the target of shoe thieves everywhere).  Harry makes no promise about how comfortable these slippers are though.</p>
+                                <h2>{product.productName}</h2>
+                                <p>{product.longDescription}</p>
                                 <label className={styles.label}>Price:</label>
-                                <p className={styles.price}>Rs. 684,750,000</p>
+                                <p className={styles.price}>{product.productPrice}</p>
                                 <label className={styles.label}>Quantity: </label>
                                 <input className={styles.qty} type="number" value={quantity} onChange={handleQuantity}/>
                                 <div className={styles.button}>
-                                    {/* <Link to={`/BookNowForm/${item.id}`}> */}
+                                    <Link to={`/productcart/${product.id}`}>
                                         <button type="submit" className={styles.btn}>Add to Cart</button>
-                                    {/* </Link> */}
+                                    </Link>
                                 </div>
                             </td>
                         </div>

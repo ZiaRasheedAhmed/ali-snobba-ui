@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useCallback } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from './Cart.module.css';
 
 const Cart = () => {
+    const param = useParams();
+    const [product, setProduct] = useState([]);
+
+    useEffect(()=>{
+        fetch("http://localhost:8080/product/"+param.productID).then((response) => response.json()).then((result) => setProduct(result));
+    }, [param.productID]);
     return (
         <>
             <div className={styles.header}>
@@ -14,11 +22,11 @@ const Cart = () => {
                 <h1>Selected Items!</h1>
                 <div className={styles.row}>
                     <div className={styles.column}>
-                        <img className={styles.img} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/LandYachtMotorHome.jpg"></img>
+                        <img className={styles.img} src={product.productImage}></img>
                         <div className={styles.listrow}>
-                            <h4>Ruby Slippers</h4>
+                            <h4>{product.productName}</h4>
                             <p>Quantity</p>
-                            <p>Price</p>
+                            <p>Price: {product.productPrice}/=</p>
                             <p>Total Price</p>
                         </div>
                         <Link to=''>
@@ -34,7 +42,7 @@ const Cart = () => {
                 </div>
                 <div className={styles.btnrow}>
                     <div className={styles.btncolumn}>
-                        <Link to=''>
+                        <Link to='/checkout'>
                             <button className={styles.button} type="submit">
                                 Checkout
                             </button>
