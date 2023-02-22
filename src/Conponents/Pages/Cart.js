@@ -7,7 +7,15 @@ import styles from './Cart.module.css';
 const Cart = () => {
     const param = useParams();
     const [product, setProduct] = useState([]);
+    // function currencyFormat(price){
+    //     return price.replace(/(\d)(?=(\d{10})+(?!\d))/g);
+    // }
 
+    const numberFormat = (value) =>
+        new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'PKR'
+    }).format(value);
     useEffect(()=>{
         fetch("http://localhost:8080/product/"+param.productID).then((response) => response.json()).then((result) => setProduct(result));
     }, [param.productID]);
@@ -26,7 +34,7 @@ const Cart = () => {
                         <div className={styles.listrow}>
                             <h4>{product.productName}</h4>
                             <p>Quantity</p>
-                            <p>Price: {product.productPrice}/=</p>
+                            <p>Price: {numberFormat(product.productPrice)}/=</p>
                             <p>Total Price</p>
                         </div>
                         <Link to=''>

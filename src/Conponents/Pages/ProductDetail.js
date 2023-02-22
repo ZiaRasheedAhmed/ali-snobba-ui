@@ -14,6 +14,11 @@ const ProductDetail = () =>{
 
     const param = useParams();
     const [product, setProduct] = useState([]);
+    const numberFormat = (value) =>
+        new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'PKR'
+    }).format(value);
 
     useEffect(()=>{
         fetch("http://localhost:8080/product/"+param.productID).then((response) => response.json()).then((result) => setProduct(result));
@@ -37,7 +42,7 @@ const ProductDetail = () =>{
                                 <h2>{product.productName}</h2>
                                 <p>{product.longDescription}</p>
                                 <label className={styles.label}>Price:</label>
-                                <p className={styles.price}>{product.productPrice}</p>
+                                <p className={styles.price}>{numberFormat(product.productPrice)}/=</p>
                                 <label className={styles.label}>Quantity: </label>
                                 <input className={styles.qty} type="number" value={quantity} onChange={handleQuantity}/>
                                 <div className={styles.button}>
