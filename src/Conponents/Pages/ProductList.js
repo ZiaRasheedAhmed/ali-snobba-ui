@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './ProductList.module.css';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.header}>
@@ -15,27 +17,31 @@ const ProductList = () => {
                 <div className={styles.row}>
                     <div className={styles.column}>
                         <img className={styles.img} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/ActualRubyRubySlippers.jpg"></img>
-                        <h2>Ruby Slippers</h2>
+                        <h2>
+                            {/* <Link to='/productdetails'> */}
+                            Ruby Slippers
+                            {/* </Link> */}
+                        </h2>
                         <p>An impressive pair of slippers featuring thousands of real rubies.</p>
                         <p>Product Price: Rs.684,750,000</p>
                         <p>Product Quantity</p>
                         <p><button className={styles.btn}>Add to Cart</button></p>
                     </div>
-                </div>
-                <div className={styles.row}>
                     <div className={styles.column}>
                         <img className={styles.img} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/ChocolatePudding.png"></img>
-                        <h2>Product Name</h2>
+                        <h2>{/* <Link to='/productdetails'> */}
+                            Ruby Slippers
+                            {/* </Link> */}</h2>
                         <p>Short Description</p>
                         <p>Product Price</p>
                         <p>Product Quantity</p>
                         <p><button className={styles.btn}>Add to Cart</button></p>
                     </div>
-                </div>
-                <div className={styles.row}>
                     <div className={styles.column}>
                         <img className={styles.img} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/DiamondWatch.jpg"></img>
-                        <h2>Product Name</h2>
+                        <h2>{/* <Link to='/productdetails'> */}
+                            Ruby Slippers
+                            {/* </Link> */}</h2>
                         <p>Short Description</p>
                         <p>Product Price</p>
                         <p>Product Quantity</p>
@@ -45,17 +51,19 @@ const ProductList = () => {
                 <div className={styles.row}>
                     <div className={styles.column}>
                         <img className={styles.img} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/GoldenToilet.jpg"></img>
-                        <h2>Product Name</h2>
+                        <h2>{/* <Link to='/productdetails'> */}
+                            Ruby Slippers
+                            {/* </Link> */}</h2>
                         <p>Short Description</p>
                         <p>Product Price</p>
                         <p>Product Quantity</p>
                         <p><button className={styles.btn}>Add to Cart</button></p>
                     </div>
-                </div>
-                <div className={styles.row}>
                     <div className={styles.column}>
                         <img className={styles.img} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/LandYachtMotorHome.jpg"></img>
-                        <h2>Product Name</h2>
+                        <h2>{/* <Link to='/productdetails'> */}
+                            Ruby Slippers
+                            {/* </Link> */}</h2>
                         <p>Short Description</p>
                         <p>Product Price</p>
                         <p>Product Quantity</p>

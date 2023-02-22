@@ -3,7 +3,7 @@
     margin: 0px;
 }
 *{
-    padding: 2px;
+    padding: 0px;
     margin: 0px;
 }
 .logo{
@@ -17,9 +17,7 @@
 .product{
     display: flex;
     flex-direction: column;
-    /* justify-content: center !important; */
     align-items: center;
-
 }
 .column{
     border: 2px solid black;
@@ -43,4 +41,8 @@
     border: 5px solid #DAAD76 ;
     background-color: #153535;
     color: #DAAD76;
+}
+.row{
+    display: flex;
+    padding: 10px;
 }
