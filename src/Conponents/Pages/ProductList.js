@@ -53,7 +53,7 @@ const ProductList = () => {
                     </div>
                 </div>
                 <div className={styles.row}>
-                    <div className={styles.img} className={styles.column}>
+                    <div className={styles.column}>
                         <img className={styles.img} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/LandYachtMotorHome.jpg"></img>
                         <h2>Product Name</h2>
                         <p>Short Description</p>
