@@ -1,14 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ProductList.module.css';
-import { Link, useParams } from 'react-router-dom';
+import Product from './Product';
 
 const ProductList = () => {
-    const [quantity, setQuantity] = useState('1');
-
-
-    const handleQuantity = useCallback(e => {
-        setQuantity(e.target.value);
-    }, []);
     // const param = useParams();
     const [product, setProduct] = useState([]);
     useEffect(() => {
@@ -16,35 +10,20 @@ const ProductList = () => {
     }, []);
     return (
         <div className={styles.mainContainer}>
+            {/* <i class="fa-solid fa-cart-shopping"></i> */}
             <div className={styles.header}>
                 <nav>
-                    <img className={styles.logo} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/Logo.png"></img>
+                    <img className={styles.logo} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/Logo.png" alt='logo'></img>
                 </nav>
+                
             </div>
 
             <h1>Welcome to Ali Snobba</h1>
-
+            
 
             <div className={styles.product}>
                 {product.length !== 0 ? product.map((data) => {
-                    return <div className={styles.row}>
-                        <div className={styles.column}>
-                            <img className={styles.img} src={data.productImage}></img>
-                            <h2>
-                                <Link to={`/productdetails/${data.id}`}>
-                                {data.productName}
-                                </Link>
-                            </h2>
-                            <p>{data.shortDescription}</p>
-                            <p>Price: {data.productPrice} Rupees Only</p>
-                            <label className={styles.label}>Quantity: </label>
-                                <input className={styles.qty} type="number" value={quantity} onChange={handleQuantity}/>
-                            <p><Link to={`/productcart/${data.id}`}>
-                                <button className={styles.btn}>Add to Cart</button>
-                                </Link> 
-                            </p>
-                        </div>
-                    </div>
+                    return <Product data={data}/>
                 }) : null};
             </div>
                 {/* <div className={styles.row}>

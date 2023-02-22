@@ -37,7 +37,7 @@
     text-align: start;
 }
 i{
-    color: red;
+    /* color: red; */
     /* display: flex;
     justify-content: end; */
     /* position: relative;
@@ -71,7 +71,7 @@ i{
     background-color: #153535;
     color: #DAAD76;
 }
-/* .icon{
-    position: relative;
-    right: 50px;
-} */
+.icon{
+    /* position: relative;
+    right: 50px; */
+}

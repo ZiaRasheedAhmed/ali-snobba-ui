@@ -9,3 +9,7 @@
 .mainContainer{
     padding: 50px;
 }
+.startover{
+    border:none;
+    background-color: white;
+}

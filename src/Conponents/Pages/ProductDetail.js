@@ -27,14 +27,14 @@ const ProductDetail = () =>{
         <>
             <div className={styles.header}>
                 <nav>
-                    <img className={styles.logo} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/Logo.png"></img>
+                    <img className={styles.logo} src="https://raw.githubusercontent.com/jeff-lent/Alisnobba/main/Capstone/Logo.png" alt="logo"></img>
                 </nav>
             </div>
             <h1>Product Details</h1>
             <div className={styles.mainContainer}>
                 <table className={styles.productDesc}>
                     <tr>
-                        <td rowSpan={2}><img src={product.productImage} className={styles.image}></img></td>
+                        <td rowSpan={2}><img src={product.productImage} className={styles.image} alt={product.name}></img></td>
                     </tr>
                     <tr>
                         <div className={styles.descText}>
@@ -44,7 +44,7 @@ const ProductDetail = () =>{
                                 <label className={styles.label}>Price:</label>
                                 <p className={styles.price}>{numberFormat(product.productPrice)}/=</p>
                                 <label className={styles.label}>Quantity: </label>
-                                <input className={styles.qty} type="number" value={quantity} onChange={handleQuantity}/>
+                                <input min={1} className={styles.qty} type="number" value={quantity} onChange={handleQuantity}/>
                                 <div className={styles.button}>
                                     <Link to={`/productcart/${product.id}`}>
                                         <button type="submit" className={styles.btn}>Add to Cart</button>

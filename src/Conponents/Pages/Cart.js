@@ -2,23 +2,35 @@ import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+
+
 import styles from './Cart.module.css';
+import CartProduct from "./CartProduct";
 
 const Cart = () => {
-    const param = useParams();
-    const [product, setProduct] = useState([]);
-    // function currencyFormat(price){
-    //     return price.replace(/(\d)(?=(\d{10})+(?!\d))/g);
-    // }
-
+    const [items, setItems] = useState([]);
+    const [total,setTotal] = useState(0);
     const numberFormat = (value) =>
         new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'PKR'
-    }).format(value);
-    useEffect(()=>{
-        fetch("http://localhost:8080/product/"+param.productID).then((response) => response.json()).then((result) => setProduct(result));
-    }, [param.productID]);
+            style: 'currency',
+            currency: 'PKR'
+        }).format(value);
+
+    useEffect(() => {
+        let t=0;
+        fetch("http://localhost:8081/cart/allcart").then((response) => response.json()).then((result) => {
+            setItems(result);
+            result.forEach(element => {
+                t+= element.totalPrice;
+                setTotal(t);
+            });
+        });
+    }, []);
+
+    const deleteProduct=(item)=>{
+        setItems(prev=> prev.filter(prevItem=> prevItem.id !== item.id));
+        setTotal(prev=> prev-=item.totalPrice);
+    }
     return (
         <>
             <div className={styles.header}>
@@ -28,26 +40,20 @@ const Cart = () => {
             </div>
             <div className={styles.cart}>
                 <h1>Selected Items!</h1>
-                <div className={styles.row}>
-                    <div className={styles.column}>
-                        <img className={styles.img} src={product.productImage}></img>
-                        <div className={styles.listrow}>
-                            <h4>{product.productName}</h4>
-                            <p>Quantity</p>
-                            <p>Price: {numberFormat(product.productPrice)}/=</p>
-                            <p>Total Price</p>
-                        </div>
-                        <Link to=''>
-                            <i class="fa-solid fa-x "></i>
-                        </Link>
-                    </div>
-                </div>
+                {
+                    items.length !== 0 ? items.map((x) => {
+                        return (
+                            <CartProduct x={x} deleteProduct={deleteProduct}/>
+                        );
+                    }) : null
+                }
                 <div className={styles.pricerow}>
                     <div className={styles.pricecolumn}>
                         <label><h4>Your Total Bill: </h4></label>
-                        <input readOnly className={styles.totalPrice} type="text" placeholder="Order Total"></input>
+                        <input readOnly className={styles.totalPrice} type="text" value={numberFormat(total)} placeholder="Order Total"></input>
                     </div>
                 </div>
+
                 <div className={styles.btnrow}>
                     <div className={styles.btncolumn}>
                         <Link to='/checkout'>

@@ -1,7 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from './Checkout.module.css';
 const Checkout = () => {
+    const n = useNavigate();
+    const deleteAll=()=>{
+        fetch("http://localhost:8081/cart/deleteall", {
+            method: 'DELETE'
+        }).then(()=>n("/"));
+    }
+
     return(
         <>
         <div className={styles.header}>
@@ -13,9 +20,8 @@ const Checkout = () => {
             <h1>ThankYou for Ordering....!</h1>
             <h2>Your Order is Placed!</h2>
             <div>
-                <Link to='/'>
-                    <h3>Start Over?</h3>
-                </Link>
+                <button className={styles.startover} onClick={deleteAll}>Start Over?
+                </button>
             </div>
 
         </div>
